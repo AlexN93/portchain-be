@@ -1,14 +1,9 @@
 const express = require('express'),
     app = express();
+import { cache } from '../cache/memCache'
 import portService from '../services/portService';
 
-/* GET a list of ports with related information.
-     * @param (optional) req.query.limit        {Number}  The number of records to return
-     * @param (optional) req.query.sortKey      {String}  The property on which to sort
-     * @param (optional) req.query.sortDir      {String}  The sort direction ('asc' or 'dsc')
-     * @param (optional) req.query.durationPerc {Array}   An array of port call duration percentiles
-     * */
-app.get('/', async (req, res, next) => {
+app.get('/', cache(600), async (req, res, next) => {
     try {
         const { limit, sortKey, sortDir, durationPerc } = req.query;
 
@@ -20,10 +15,7 @@ app.get('/', async (req, res, next) => {
     }
 });
 
-/* GET basic information about a specific port.
- * @param (optional) req.query.durationPerc   {Array}   An array of port call duration percentiles
- * */
-app.get('/:portId', async (req, res, next) => {
+app.get('/:portId', cache(600), async (req, res, next) => {
     try {
         const id = req.params['portId'].trim();
         const { durationPerc } = req.query;
@@ -38,10 +30,7 @@ app.get('/:portId', async (req, res, next) => {
     }
 });
 
-/* GET the full schedule for a specific port.
- * @param req.params.portId   {String}  The id of the port
- * */
-app.get('/:portId/schedule/', async (req, res, next) => {
+app.get('/:portId/schedule/', cache(600), async (req, res, next) => {
     try {
         const id = req.params['portId'].trim();
 

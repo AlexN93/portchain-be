@@ -26,7 +26,6 @@ function findAll(sortKey, sortDir, limit, percentilePoints) {
 
     const ports = portsWithStats(percentilePoints);
 
-    // TODO - fix me
     ports.sortAndLimit(utils.sanitizeStrings(sortKey), sortDir, limit);
 
     return ports;
