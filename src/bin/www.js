@@ -7,7 +7,7 @@ import app from '../app';
 import debugLibrary from 'debug';
 import http from 'http';
 
-const debug = debugLibrary('portchain-backend:server');
+const debug = debugLibrary('portchain-be:server');
 
 /**
  * Get port from environment and store in Express.

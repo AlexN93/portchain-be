@@ -1,6 +1,6 @@
 {
   "name": "portchain-be",
   "version": "1.0.0",
-  "description": "api documentation for portchain api service",
-  "url" : "https://github.com/AlexN93/portchain-be"
+  "description": "api documentation for portchain-be service",
+  "url" : "http://localhost:8080/api"
 }

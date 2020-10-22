@@ -10,7 +10,7 @@
     "server": "node ./build/bin/www",
     "transpile": "babel ./src --out-dir build",
     "clean": "rimraf build",
-    "dev:doc": "apidoc -i config/ -o doc/"
+    "dev:doc": "apidoc -i src/ -o doc/"
   },
   "repository": {
     "type": "git",
@@ -24,23 +24,20 @@
   "homepage": "https://github.com/AlexN93/portchain-be#readme",
   "dependencies": {
     "@babel/node": "^7.12.1",
-    "apidoc": "^0.25.0",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
     "debug": "^4.2.0",
     "express": "^4.17.1",
-    "ioredis": "^4.17.3",
     "lodash": "^4.17.20",
     "memory-cache": "^0.2.0",
-    "morgan": "^1.10.0",
-    "node-cache": "^5.1.2",
-    "redis": "^3.0.2"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/register": "^7.12.1",
+    "apidoc": "^0.25.0",
     "nodemon": "^2.0.6",
     "rimraf": "^3.0.2"
   },
