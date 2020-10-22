@@ -2,24 +2,6 @@ const { round } = require('lodash');
 import { memCache } from '../cache/memCache';
 import utils from '../utils';
 import { PortCall } from '../models/PortCall';
-import { Port } from '../models/Port';
-
-function findOne(portId, percentilePoints) {
-    percentilePoints = utils.sanitizeNumbers(percentilePoints);
-    return portsWithStats(percentilePoints).find(port => port.id === portId);
-}
-
-function findOneWithSchedule(portId) {
-    const portCalls = cachedCalls().filter(portCall => new PortCall(portCall).port.id === portId);
-
-    if (!portCalls) return;
-
-    return new Port({
-        id: portId,
-        name: portCalls[0].port.name,
-        portCalls: portCalls.map(({ port, ...fieldsToKeep }) => fieldsToKeep),
-    });
-}
 
 function findAll(sortKey, sortDir, limit, percentilePoints) {
     percentilePoints = utils.sanitizeNumbers(percentilePoints);
@@ -32,7 +14,8 @@ function findAll(sortKey, sortDir, limit, percentilePoints) {
 }
 
 function portsWithStats(durationPercentiles) {
-    const ports = cachedCalls().reduce((ports, portCall) => {
+    const cachedCalls = memCache.get('schedules').flatMap(schedule => schedule.portCalls);
+    const ports = cachedCalls.reduce((ports, portCall) => {
         const { port, arrival, departure, isOmitted } = new PortCall(portCall);
         const portCallDuration = durationPercentiles && round(utils.hoursBetween(arrival, departure), 2);
 
@@ -72,6 +55,4 @@ function portsWithStats(durationPercentiles) {
     return ports;
 }
 
-const cachedCalls = () => memCache.get('schedules').flatMap(schedule => schedule.portCalls);
-
-export default { findOne, findAll, findOneWithSchedule };
+export default { findAll };

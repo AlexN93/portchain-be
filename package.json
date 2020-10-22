@@ -9,7 +9,8 @@
     "build": "npm run clean && npm run transpile",
     "server": "node ./build/bin/www",
     "transpile": "babel ./src --out-dir build",
-    "clean": "rimraf build"
+    "clean": "rimraf build",
+    "dev:doc": "apidoc -i config/ -o doc/"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/AlexN93/portchain-be#readme",
   "dependencies": {
     "@babel/node": "^7.12.1",
+    "apidoc": "^0.25.0",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
     "debug": "^4.2.0",

@@ -15,33 +15,4 @@ app.get('/', cache(600), async (req, res, next) => {
     }
 });
 
-app.get('/:vesselId', cache(600), async (req, res, next) => {
-    try {
-        const id = req.params['vesselId'].trim();
-        const { delayDays, delayPerc } = req.query;
-
-        const schedule = vesselService.findOne(+id, delayDays, delayPerc);
-
-        if (!schedule) res.status(404).end();
-
-        res.status(200).send(schedule);
-    } catch (e) {
-        next(e);
-    }
-});
-
-app.get('/:vesselId/schedule/', cache(600), async (req, res, next) => {
-    try {
-        const id = req.params['vesselId'].trim();
-
-        const schedule = vesselService.findOneWithSchedule(+id);
-
-        if (!schedule) res.status(404).end();
-
-        res.status(200).send(schedule);
-    } catch (e) {
-        next(e);
-    }
-});
-
 module.exports = app;
