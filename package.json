@@ -1,0 +1,67 @@
+{
+  "name": "portchain-be",
+  "version": "1.0.0",
+  "description": "portchain-be",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && npm run server",
+    "start:dev": "nodemon",
+    "build": "npm run clean && npm run transpile",
+    "server": "node ./build/bin/www",
+    "transpile": "babel ./src --out-dir build",
+    "clean": "rimraf build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexN93/portchain-be.git"
+  },
+  "author": "Alex Nikolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexN93/portchain-be/issues"
+  },
+  "homepage": "https://github.com/AlexN93/portchain-be#readme",
+  "dependencies": {
+    "@babel/node": "^7.12.1",
+    "axios": "^0.20.0",
+    "cors": "^2.8.5",
+    "debug": "^4.2.0",
+    "express": "^4.17.1",
+    "ioredis": "^4.17.3",
+    "lodash": "^4.17.20",
+    "memory-cache": "^0.2.0",
+    "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run start",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "*.test.js",
+      "*.spec.js"
+    ]
+  }
+}
