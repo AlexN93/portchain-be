@@ -21,13 +21,13 @@ const initialize = new Promise((resolve, reject) => {
         .catch(e => reject(e));
 });
 
-app.use('/api/ports', portRouter);
-app.use('/api/vessels', vesselRouter);
-
 app.use(async (req, res, next) => {
     await initialize;
     next();
 });
+
+app.use('/api/ports', portRouter);
+app.use('/api/vessels', vesselRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

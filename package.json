@@ -10,7 +10,8 @@
     "server": "node ./build/bin/www",
     "transpile": "babel ./src --out-dir build",
     "clean": "rimraf build",
-    "dev:doc": "apidoc -i src/ -o doc/"
+    "dev:doc": "apidoc -i src/ -o doc/",
+    "test": "mocha --timeout 10000 --exit --r @babel/register --recursive tests"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,9 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/register": "^7.12.1",
     "apidoc": "^0.25.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.2.0",
     "nodemon": "^2.0.6",
     "rimraf": "^3.0.2"
   },
